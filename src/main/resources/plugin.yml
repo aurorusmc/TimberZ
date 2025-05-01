@@ -1,0 +1,6 @@
+name: TimberZ
+version: '1.0'
+main: com.zetaplugins.timberz.TimberZ
+api-version: '1.21'
+load: STARTUP
+authors: [ zetaplugins ]
