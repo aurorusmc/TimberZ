@@ -25,6 +25,12 @@ public class AxeEquipListener implements Listener {
         Player player = event.getPlayer();
         if (player.isSneaking()) return;
 
+        player.sendMessage(plugin.getMessageService().getAndFormatMsg(
+                true,
+                "testmsg",
+                "&7This is a test message with an %ac%accent &7color."
+        ));
+
         ItemStack main = event.getMainHandItem();
         ItemStack off = event.getOffHandItem();
 
@@ -54,7 +60,11 @@ public class AxeEquipListener implements Listener {
 
         if (event.getRawSlots().contains(40)) {
             event.setCancelled(true);
-            player.sendMessage(org.bukkit.ChatColor.RED + "You cannot drag axes into your off-hand!");
+            player.sendMessage(plugin.getMessageService().getAndFormatMsg(
+                    false,
+                    "cannotDragAxesIntoOffHand",
+                    "&cYou cannot drag axes into your offhand!"
+            ));
         }
     }
 

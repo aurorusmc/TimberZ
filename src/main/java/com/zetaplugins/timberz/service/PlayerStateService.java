@@ -39,7 +39,11 @@ public class PlayerStateService {
             startActionBar(player);
         } else {
             stopActionBar(player);
-            player.sendActionBar(ChatColor.YELLOW + "TimberZ: " + ChatColor.RED + "OFF");
+            player.sendActionBar(plugin.getMessageService().getAndFormatMsg(
+                    false,
+                    "timberModeOff",
+                    "&7Timber: &cOFF&7"
+            ));
         }
     }
 
@@ -56,7 +60,11 @@ public class PlayerStateService {
                 stopActionBar(player);
                 return;
             }
-            player.sendActionBar(ChatColor.YELLOW + "TimberZ: " + ChatColor.GREEN + "ON");
+            player.sendActionBar(plugin.getMessageService().getAndFormatMsg(
+                            false,
+                            "timberModeOn",
+                            "&7Timber: &aON&7"
+            ));
         }, 0L, 40L); // Repeat every 40 ticks = 2 seconds
 
         actionBarTasks.put(player, task);

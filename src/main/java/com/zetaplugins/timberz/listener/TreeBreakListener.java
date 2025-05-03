@@ -3,7 +3,7 @@ package com.zetaplugins.timberz.listener;
 import com.zetaplugins.timberz.TimberZ;
 import com.zetaplugins.timberz.service.PlayerStateService;
 import com.zetaplugins.timberz.service.TreeDetection;
-import com.zetaplugins.timberz.service.TimberZService;
+import com.zetaplugins.timberz.service.TreeFellerService;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -18,12 +18,12 @@ import java.util.Set;
 public class TreeBreakListener implements Listener {
 
     private final TimberZ plugin;
-    private final TimberZService TimberZService;
+    private final TreeFellerService TreeFellerService;
     private final PlayerStateService playerStateService;
 
-    public TreeBreakListener(TimberZ plugin, TimberZService TimberZService, PlayerStateService playerStateService) {
+    public TreeBreakListener(TimberZ plugin, TreeFellerService TreeFellerService, PlayerStateService playerStateService) {
         this.plugin = plugin;
-        this.TimberZService = TimberZService;
+        this.TreeFellerService = TreeFellerService;
         this.playerStateService = playerStateService;
     }
 
@@ -57,7 +57,7 @@ public class TreeBreakListener implements Listener {
                         event.setCancelled(true);
 
                         // Process the tree felling
-                        TimberZService.fellTree(player, brokenBlock, treeBlocks, handItem, durabilityCost);
+                        TreeFellerService.fellTree(player, brokenBlock, treeBlocks, handItem, durabilityCost);
                     }
                     // If not enough durability, just let the vanilla event proceed
                 }

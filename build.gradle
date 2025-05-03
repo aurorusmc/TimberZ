@@ -6,12 +6,6 @@ plugins {
 group = 'com.zetaplugins'
 version = '1.0'
 
-processResources {
-    filesMatching('plugin.yml') {
-        expand(project.properties)
-    }
-}
-
 repositories {
     mavenCentral()
     maven {
@@ -26,6 +20,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.5-R0.1-SNAPSHOT")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
 }
 
 tasks {

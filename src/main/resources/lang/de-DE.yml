@@ -1,0 +1,5 @@
+prefix: "&8[<gradient:#00D26A:#00B24F>TimberZ&8]"
+cannotDragAxesIntoOffHand: "&cDu kannst Äxte nicht in deine Offhand ziehen!"
+timberModeOn: "&7Timber: &aAN&7"
+timberModeOff: "&7Timber: &cAUS&7"
+testmsg: "&7This is a test message with an %ac%accent &7color."

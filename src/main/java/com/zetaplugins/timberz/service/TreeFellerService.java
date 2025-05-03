@@ -15,13 +15,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
-public class TimberZService {
+public class TreeFellerService {
     private final TimberZ plugin;
     private final TreeAnimationHandler animationHandler;
     private final SaplingReplanter saplingReplanter;
     private final Random random = new Random();
 
-    public TimberZService(TimberZ plugin) {
+    public TreeFellerService(TimberZ plugin) {
         this.plugin = plugin;
         this.animationHandler = new TreeAnimationHandler(plugin);
         this.saplingReplanter = new SaplingReplanter(plugin);
