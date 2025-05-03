@@ -1,41 +1,52 @@
 package com.zetaplugins.timberz.service;
 
+import com.zetaplugins.timberz.TimberZ;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
 import java.util.*;
 
-public final class TreeDetection {
-    private static final int MAX_TREE_SIZE = 500;
-    private static final int MAX_SEARCH_RADIUS = 1;
-    private static final int DIAGONAL_SEARCH_RANGE = 2;
-    private static final int MIN_LEAVES_REQUIRED = 5;
-    private static final int MIN_LOGS_REQUIRED = 3;
+public final class TreeDetectionService {
+    private final TimberZ plugin;
+
+    private final int MAX_TREE_SIZE;
+    private final int MAX_SEARCH_RADIUS;
+    private final int DIAGONAL_SEARCH_RANGE;
+    private final int MIN_LEAVES_REQUIRED;
+    private final int MIN_LOGS_REQUIRED;
 
     // Maps log types to their corresponding leaf types
-    private static final Map<Material, Material> LOG_TO_LEAF_MAP = new HashMap<>();
+    private final Map<Material, Material> LOG_TO_LEAF_MAP = new HashMap<>();
 
-    static {
-        // Standard tree types
-        LOG_TO_LEAF_MAP.put(Material.OAK_LOG, Material.OAK_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.BIRCH_LOG, Material.BIRCH_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.SPRUCE_LOG, Material.SPRUCE_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.JUNGLE_LOG, Material.JUNGLE_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.ACACIA_LOG, Material.ACACIA_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.DARK_OAK_LOG, Material.DARK_OAK_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.MANGROVE_LOG, Material.MANGROVE_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.CHERRY_LOG, Material.CHERRY_LEAVES);
+    public TreeDetectionService(TimberZ plugin) {
+        this.plugin = plugin;
 
-        // Wood types (stripped logs)
-        LOG_TO_LEAF_MAP.put(Material.STRIPPED_OAK_LOG, Material.OAK_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.STRIPPED_BIRCH_LOG, Material.BIRCH_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.STRIPPED_SPRUCE_LOG, Material.SPRUCE_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.STRIPPED_JUNGLE_LOG, Material.JUNGLE_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.STRIPPED_ACACIA_LOG, Material.ACACIA_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.STRIPPED_DARK_OAK_LOG, Material.DARK_OAK_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.STRIPPED_MANGROVE_LOG, Material.MANGROVE_LEAVES);
-        LOG_TO_LEAF_MAP.put(Material.STRIPPED_CHERRY_LOG, Material.CHERRY_LEAVES);
+        MAX_TREE_SIZE = plugin.getConfig().getInt("maxTreeSize", 1000);
+        MAX_SEARCH_RADIUS = plugin.getConfig().getInt("maxSearchRadius", 1);
+        DIAGONAL_SEARCH_RANGE = plugin.getConfig().getInt("diagonalSearchRange", 2);
+        MIN_LEAVES_REQUIRED = plugin.getConfig().getInt("minLeavesRequired", 5);
+        MIN_LOGS_REQUIRED = plugin.getConfig().getInt("minLogsRequired", 3);
+
+        fetchLogToLeaveMap();
+    }
+
+    /**
+     * Fetches the log-to-leaf mapping from the configuration file.
+     */
+    public void fetchLogToLeaveMap() {
+        LOG_TO_LEAF_MAP.clear();
+
+        List<String> logToLeaveList = plugin.getConfigService().getBlocksConfig().getStringList("logToLeafMap");
+
+        for (String entry : logToLeaveList) {
+            String[] parts = entry.split(":");
+            if (parts.length != 2) continue;
+
+            Material logType = Material.getMaterial(parts[0].toUpperCase());
+            Material leafType = Material.getMaterial(parts[1].toUpperCase());
+            if (logType != null && leafType != null) LOG_TO_LEAF_MAP.put(logType, leafType);
+        }
     }
 
     /**
@@ -44,7 +55,7 @@ public final class TreeDetection {
      * @param sourceBlock The log block that was broken by a player
      * @return A set of all blocks that make up the tree, or empty set if not a valid tree
      */
-    public static Set<Block> identifyTreeStructure(Block sourceBlock) {
+    public Set<Block> identifyTreeStructure(Block sourceBlock) {
         Material sourceType = sourceBlock.getType();
         Material matchingLeafType = LOG_TO_LEAF_MAP.get(sourceType);
 
@@ -95,7 +106,7 @@ public final class TreeDetection {
     /**
      * Find all connected logs of the same type, including diagonal connections.
      */
-    private static Set<Block> findConnectedLogs(Block sourceBlock, Material logType, Set<Block> visited) {
+    private Set<Block> findConnectedLogs(Block sourceBlock, Material logType, Set<Block> visited) {
         Queue<Block> queue = new LinkedList<>();
         Set<Block> connectedLogs = new HashSet<>();
 
@@ -151,7 +162,7 @@ public final class TreeDetection {
     /**
      * Additional validation for diagonal connections to avoid false positives.
      */
-    private static boolean isDiagonalConnectionValid(Block block1, Block block2, Material logType, Set<Block> knownTreeLogs) {
+    private boolean isDiagonalConnectionValid(Block block1, Block block2, Material logType, Set<Block> knownTreeLogs) {
         // Calculate the distance between blocks
         int xDiff = Math.abs(block1.getX() - block2.getX());
         int yDiff = Math.abs(block1.getY() - block2.getY());
@@ -196,7 +207,7 @@ public final class TreeDetection {
     /**
      * Validate that the connected logs have appropriate leaf blocks nearby.
      */
-    private static boolean validateLeaves(Set<Block> connectedLogs, Material leafType) {
+    private boolean validateLeaves(Set<Block> connectedLogs, Material leafType) {
         int leafCount = 0;
         Set<Block> checkedBlocks = new HashSet<>();
 
@@ -230,18 +241,18 @@ public final class TreeDetection {
     /**
      * Check if a block is a log of the specified type.
      */
-    private static boolean isMatchingLog(Block block, Material logType) {
+    private boolean isMatchingLog(Block block, Material logType) {
         return block.getType() == logType;
     }
 
-    public static boolean containsLog(Material blockType){
+    public boolean containsLog(Material blockType){
         return LOG_TO_LEAF_MAP.containsKey(blockType);
     }
 
     /**
      * Get the corresponding leaf type for a log type
      */
-    public static Material getLeafType(Material logType) {
+    public Material getLeafType(Material logType) {
         return LOG_TO_LEAF_MAP.get(logType);
     }
 }

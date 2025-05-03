@@ -18,10 +18,36 @@
 checkForUpdates: true
 
 # Set the language to any code found in the "lang" folder (don't add the .yml extension)
-# You can add your own language files. Use https://github.com/KartoffelChipss/LifeStealZ/tree/main/src/main/resources/lang/en-US.yml as a template
-# If you want to help translating the plugin, please refer to this article: https://lsz.strassburger.dev/contributing/localization
-#  | en-US | de-DE | es-ES | fr-FR | cs-CZ | vi-VN | zh-CN | pl-PL | nl-NL | ru-RU
+# You can add your own language files. Use https://github.com/ZetaPlugins/TimberZ/tree/main/src/main/resources/lang/en-US.yml as a template
+# If you want to help translating the plugin, please refer to this article: https://docs.zetaplugins.com/#contributing
+#  | en-US | de-DE |
 lang: "en-US"
 
 # The accent color of the plugin. This color replaces %ac% in the lang files.
 accentColor: "<#00D26A>"
+
+
+# === TIMBER SETTINGS ===
+
+# If set to true, TimberZ will replant the tree after cutting it down
+replant: true
+
+# Modify how much durability is removed from the axe when cutting down a tree
+# Formula: logCount * durabilityMultiplier
+durabilityMultiplier: 1.0
+
+# The minimum durability the axe must have after cutting down a tree
+minDurability: 10
+
+
+# === TREE DETECTION ===
+
+# Only change these settings if you know what you are doing!
+# These are used to detect trees and their leaves and are already fine tuned.
+
+leavesSearchRadius: 4
+maxTreeSize: 500
+maxSearchRadius: 1
+diagonalSearchRange: 2
+minLeavesRequired: 5
+minLogsRequired: 3

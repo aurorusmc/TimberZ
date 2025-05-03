@@ -19,8 +19,10 @@ public final class ReloadSubCommand implements SubCommand {
             return false;
         }
 
+        plugin.getConfigService().initConfigs();
         plugin.reloadConfig();
         plugin.getLocalizationService().reload();
+        plugin.getTreeDetectionService().fetchLogToLeaveMap();
         sender.sendMessage(plugin.getMessageService().getAndFormatMsg(
                 true,
                 "reloadMsg",

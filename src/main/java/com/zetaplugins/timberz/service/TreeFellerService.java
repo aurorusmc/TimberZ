@@ -15,6 +15,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
+import static com.zetaplugins.timberz.service.MaterialTypeChecks.isLeafBlock;
+
 public final class TreeFellerService {
     private final TimberZ plugin;
     private final TreeAnimationHandler animationHandler;
@@ -34,7 +36,7 @@ public final class TreeFellerService {
         Material logType = sourceBlock.getType();
 
         // Get corresponding leaf type
-        Material leafType = TreeDetection.getLeafType(logType);
+        Material leafType = plugin.getTreeDetectionService().getLeafType(logType);
 
         // Store information about tree type for replanting
         SaplingReplanter.TreeInfo treeInfo = saplingReplanter.analyzeTreeType(sourceBlock, treeBlocks);
@@ -50,8 +52,10 @@ public final class TreeFellerService {
             scheduleLeafDecay(leafBlocks);
         }
 
+        boolean shouldReplant = plugin.getConfig().getBoolean("replant");
+
         // Schedule sapling replanting
-        if (treeInfo != null) {
+        if (treeInfo != null && shouldReplant) {
             saplingReplanter.scheduleSaplingReplant(treeInfo);
         }
     }
@@ -65,7 +69,7 @@ public final class TreeFellerService {
         Set<Block> otherTreeLogs = new HashSet<>();
 
         // Search radius for leaves around each log
-        final int SEARCH_RADIUS = 4;
+        final int SEARCH_RADIUS = plugin.getConfig().getInt("leavesSearchRadius", 4);
 
         // First pass: Collect all leaves and identify potential other tree logs
         for (Block log : treeBlocks) {
@@ -84,7 +88,7 @@ public final class TreeFellerService {
 
                         if (checkBlock.getType() == leafType) {
                             leafBlocks.add(checkBlock);
-                        } else if (TreeDetection.containsLog(checkBlock.getType()) && !treeBlocks.contains(checkBlock)) {
+                        } else if (plugin.getTreeDetectionService().containsLog(checkBlock.getType()) && !treeBlocks.contains(checkBlock)) {
                             // This is a log block that's not part of our tree - potential other tree
                             otherTreeLogs.add(checkBlock);
                         }
@@ -157,7 +161,7 @@ public final class TreeFellerService {
                 public void run() {
                     // Check if the leaf still exists
                     // could also add  && !isConnectedToLog(leaf) to fix the issue of neighboring trees, but I shouldnt have to.
-                    if (isLeafBlock(leaf.getType())) {
+                    if (isLeafBlock(leaf.getType(), plugin.getConfigService().getBlocksConfig())) {
                         // Create breaking particles
                         leaf.getWorld().spawnParticle(
                                 Particle.BLOCK,
@@ -181,20 +185,6 @@ public final class TreeFellerService {
     }
 
     /**
-     * Checks if a material is a leaf block
-     */
-    private boolean isLeafBlock(Material material) {
-        return material == Material.OAK_LEAVES ||
-                material == Material.BIRCH_LEAVES ||
-                material == Material.SPRUCE_LEAVES ||
-                material == Material.JUNGLE_LEAVES ||
-                material == Material.ACACIA_LEAVES ||
-                material == Material.DARK_OAK_LEAVES ||
-                material == Material.MANGROVE_LEAVES ||
-                material == Material.CHERRY_LEAVES;
-    }
-
-    /**
      * Checks if a leaf block is still connected to a log block
      * We need this to make sure we don't decay leaves attached to other trees
      */
@@ -212,7 +202,7 @@ public final class TreeFellerService {
                     Material blockType = nearbyBlock.getType();
 
                     // If we find any log block, the leaf is still supported
-                    if (TreeDetection.containsLog(blockType)) {
+                    if (plugin.getTreeDetectionService().containsLog(blockType)) {
                         return true;
                     }
                 }

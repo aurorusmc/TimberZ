@@ -14,7 +14,9 @@ public final class TimberZ extends JavaPlugin implements Listener {
     private MessageService messageService;
     private LocalizationService localizationService;
     private TreeFellerService treeFellerService;
+    private TreeDetectionService treeDetectionService;
     private VersionChecker versionChecker;
+    private ConfigService configService;
 
     @Override
     public void onEnable() {
@@ -25,9 +27,13 @@ public final class TimberZ extends JavaPlugin implements Listener {
         this.messageService = new MessageService(this);
 
         this.versionChecker = new VersionChecker(this);
+        this.configService = new ConfigService(this);
 
         this.playerStateService = new PlayerStateService(this);
         this.treeFellerService = new TreeFellerService(this);
+        this.treeDetectionService = new TreeDetectionService(this);
+
+        configService.initConfigs();
         versionChecker.checkForUpdates();
 
         new EventRegistrar(this).registerListeners();
@@ -69,5 +75,13 @@ public final class TimberZ extends JavaPlugin implements Listener {
 
     public VersionChecker getVersionChecker() {
         return versionChecker;
+    }
+
+    public TreeDetectionService getTreeDetectionService() {
+        return treeDetectionService;
+    }
+
+    public ConfigService getConfigService() {
+        return configService;
     }
 }

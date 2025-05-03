@@ -11,6 +11,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 
+import static com.zetaplugins.timberz.service.MaterialTypeChecks.isAxe;
+
 public final class AxeEquipListener implements Listener {
     private final TimberZ plugin;
     private final PlayerStateService playerStateService;
@@ -28,7 +30,7 @@ public final class AxeEquipListener implements Listener {
         ItemStack main = event.getMainHandItem();
         ItemStack off = event.getOffHandItem();
 
-        if (isAxe(main) || isAxe(off)) {
+        if (isAxeFromItemStack(main) || isAxeFromItemStack(off)) {
             event.setCancelled(true);
             playerStateService.toggleTimberState(player);
         }
@@ -40,7 +42,7 @@ public final class AxeEquipListener implements Listener {
 
         ItemStack cursor = event.getCursor();
 
-        if (event.getSlot() == 40 && isAxe(cursor)) {
+        if (event.getSlot() == 40 && isAxeFromItemStack(cursor)) {
             event.setCancelled(true);
         }
     }
@@ -50,7 +52,7 @@ public final class AxeEquipListener implements Listener {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
         ItemStack dragged = event.getOldCursor();
-        if (!isAxe(dragged)) return;
+        if (!isAxeFromItemStack(dragged)) return;
 
         if (event.getRawSlots().contains(40)) {
             event.setCancelled(true);
@@ -68,7 +70,7 @@ public final class AxeEquipListener implements Listener {
         playerStateService.cleanupPlayer(player);
     }
 
-    private boolean isAxe(ItemStack item) {
-        return item != null && item.getType() != null && item.getType().name().endsWith("_AXE");
+    private boolean isAxeFromItemStack(ItemStack item) {
+        return isAxe(item.getType(), plugin.getConfigService().getBlocksConfig());
     }
 }

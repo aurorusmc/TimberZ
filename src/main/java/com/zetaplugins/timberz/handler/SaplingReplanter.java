@@ -12,31 +12,24 @@ import java.util.*;
 public final class SaplingReplanter {
 
     private final TimberZ plugin;
-    private static final Map<Material, Material> LOG_TO_SAPLING_MAP = new HashMap<>();
-
-    static {
-        LOG_TO_SAPLING_MAP.put(Material.OAK_LOG, Material.OAK_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.BIRCH_LOG, Material.BIRCH_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.SPRUCE_LOG, Material.SPRUCE_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.JUNGLE_LOG, Material.JUNGLE_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.ACACIA_LOG, Material.ACACIA_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.DARK_OAK_LOG, Material.DARK_OAK_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.MANGROVE_LOG, Material.MANGROVE_PROPAGULE);
-        LOG_TO_SAPLING_MAP.put(Material.CHERRY_LOG, Material.CHERRY_SAPLING);
-
-        // Add stripped logs mapping too
-        LOG_TO_SAPLING_MAP.put(Material.STRIPPED_OAK_LOG, Material.OAK_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.STRIPPED_BIRCH_LOG, Material.BIRCH_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.STRIPPED_SPRUCE_LOG, Material.SPRUCE_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.STRIPPED_JUNGLE_LOG, Material.JUNGLE_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.STRIPPED_ACACIA_LOG, Material.ACACIA_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.STRIPPED_DARK_OAK_LOG, Material.DARK_OAK_SAPLING);
-        LOG_TO_SAPLING_MAP.put(Material.STRIPPED_MANGROVE_LOG, Material.MANGROVE_PROPAGULE);
-        LOG_TO_SAPLING_MAP.put(Material.STRIPPED_CHERRY_LOG, Material.CHERRY_SAPLING);
-    }
+    private final Map<Material, Material> LOG_TO_SAPLING_MAP = new HashMap<>();
 
     public SaplingReplanter(TimberZ plugin) {
         this.plugin = plugin;
+        fetchLogToSaplingMap();
+    }
+
+    private void fetchLogToSaplingMap() {
+        List<String> logToSaplingMap = plugin.getConfigService().getBlocksConfig().getStringList("logToSaplingMap");
+
+        for (String entry : logToSaplingMap) {
+            String[] parts = entry.split(":");
+            if (parts.length != 2) continue;
+
+            Material logType = Material.getMaterial(parts[0].toUpperCase());
+            Material saplingType = Material.getMaterial(parts[1].toUpperCase());
+            if (logType != null && saplingType != null) LOG_TO_SAPLING_MAP.put(logType, saplingType);
+        }
     }
 
     /**
