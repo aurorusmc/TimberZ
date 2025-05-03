@@ -2,13 +2,15 @@ package com.zetaplugins.timberz.service;
 
 import com.zetaplugins.timberz.TimberZ;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class PlayerStateService {
@@ -20,7 +22,13 @@ public final class PlayerStateService {
         this.plugin = plugin;
     }
 
-    public boolean isTimberEnabled(Player player) {
+    public boolean isAllowedToTimber(Player player) {
+        boolean toggleTimber = plugin.getConfig().getBoolean("toggleTimber");
+        if (toggleTimber) return getToggleMetadata(player);
+        else return true;
+    }
+
+    private boolean getToggleMetadata(Player player) {
         if (!player.hasMetadata(METADATA_KEY)) {
             return false;
         }
@@ -30,6 +38,17 @@ public final class PlayerStateService {
             }
         }
         return false;
+    }
+
+    private boolean isValidAxe(ItemStack item, FileConfiguration config) {
+        if (item == null) return false;
+        if (!config.getBoolean("restrictAxes")) return true;
+        List<Integer> allowedModelData = config.getIntegerList("allowedModelData");
+        if (!item.getItemMeta().hasCustomModelData()) return false;
+        int itemCustomModelData = item.getItemMeta().getCustomModelData();
+        System.out.println("Item Custom Model Data: " + itemCustomModelData);
+
+        return allowedModelData.contains(itemCustomModelData);
     }
 
     public void setTimberEnabled(Player player, boolean state) {
@@ -48,7 +67,9 @@ public final class PlayerStateService {
     }
 
     public void toggleTimberState(Player player) {
-        boolean currentState = isTimberEnabled(player);
+        boolean currentState = getToggleMetadata(player);
+        // can only turn off when toggleTimber is disabled
+        if (!plugin.getConfig().getBoolean("toggleTimber") && !currentState) return;
         setTimberEnabled(player, !currentState);
     }
 

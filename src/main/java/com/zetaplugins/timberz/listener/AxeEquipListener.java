@@ -2,6 +2,7 @@ package com.zetaplugins.timberz.listener;
 
 import com.zetaplugins.timberz.TimberZ;
 import com.zetaplugins.timberz.service.PlayerStateService;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,7 +12,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
+
 import static com.zetaplugins.timberz.service.MaterialTypeChecks.isAxe;
+import static com.zetaplugins.timberz.service.MaterialTypeChecks.isValidAxe;
 
 public final class AxeEquipListener implements Listener {
     private final TimberZ plugin;
@@ -27,10 +31,21 @@ public final class AxeEquipListener implements Listener {
         Player player = event.getPlayer();
         if (player.isSneaking()) return;
 
+        if (!player.hasPermission("timberz.useTimber") && plugin.getConfig().getBoolean("toggleTimber")) {
+            player.sendMessage(plugin.getMessageService().getAndFormatMsg(
+                    false,
+                    "noTimberPermissionError",
+                    "&cYou do not have permission to use TimberZ!"
+            ));
+            return;
+        }
+
+        if (!plugin.getConfig().getBoolean("toggleTimber")) return;
+
         ItemStack main = event.getMainHandItem();
         ItemStack off = event.getOffHandItem();
 
-        if (isAxeFromItemStack(main) || isAxeFromItemStack(off)) {
+        if (isValidAxe(main, plugin) || isValidAxe(off, plugin)) {
             event.setCancelled(true);
             playerStateService.toggleTimberState(player);
         }
@@ -38,7 +53,7 @@ public final class AxeEquipListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player)) return;
+        if (!(event.getWhoClicked() instanceof Player) || !plugin.getConfig().getBoolean("toggleTimber")) return;
 
         ItemStack cursor = event.getCursor();
 
@@ -49,7 +64,7 @@ public final class AxeEquipListener implements Listener {
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player)) return;
+        if (!(event.getWhoClicked() instanceof Player player) || !plugin.getConfig().getBoolean("toggleTimber")) return;
 
         ItemStack dragged = event.getOldCursor();
         if (!isAxeFromItemStack(dragged)) return;

@@ -30,4 +30,6 @@ public final class ConfigService {
     public void initConfigs() {
         getBlocksConfig();
     }
+
+
 }

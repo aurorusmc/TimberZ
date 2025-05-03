@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.Damageable;
 
 import java.util.Set;
 
-import static com.zetaplugins.timberz.service.MaterialTypeChecks.isAxe;
+import static com.zetaplugins.timberz.service.MaterialTypeChecks.isValidAxe;
 
 public final class TreeBreakListener implements Listener {
 
@@ -35,14 +35,14 @@ public final class TreeBreakListener implements Listener {
         Player player = event.getPlayer();
 
         if (player.isSneaking()) return;
-        if (!playerStateService.isTimberEnabled(player)) return;
+        if (!playerStateService.isAllowedToTimber(player)) return;
 
         // Check if block is a log and player is not in creative mode
         if (plugin.getTreeDetectionService().containsLog(blockType)) { //  && player.getGameMode() != GameMode.CREATIVE
             ItemStack handItem = player.getInventory().getItemInMainHand();
 
             // Check if the player is using an axe
-            if (isAxe(handItem.getType(), plugin.getConfigService().getBlocksConfig())) {
+            if (isValidAxe(handItem, plugin)) {
                 // Identify tree structure
                 Set<Block> treeBlocks = plugin.getTreeDetectionService().identifyTreeStructure(brokenBlock);
 

@@ -18,3 +18,6 @@ permissions:
     timberz.admin:
         default: op
         description: Allows the user to manage the plugin
+    timberz.useTimber:
+        default: true
+        description: Allows the user to use the TimberZ feature
