@@ -6,7 +6,7 @@ import org.bukkit.block.BlockFace;
 
 import java.util.*;
 
-public class TreeDetection {
+public final class TreeDetection {
     private static final int MAX_TREE_SIZE = 500;
     private static final int MAX_SEARCH_RADIUS = 1;
     private static final int DIAGONAL_SEARCH_RANGE = 2;

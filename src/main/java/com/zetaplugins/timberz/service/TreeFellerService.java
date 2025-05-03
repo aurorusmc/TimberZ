@@ -15,7 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
-public class TreeFellerService {
+public final class TreeFellerService {
     private final TimberZ plugin;
     private final TreeAnimationHandler animationHandler;
     private final SaplingReplanter saplingReplanter;

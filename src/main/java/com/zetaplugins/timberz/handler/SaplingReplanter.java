@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
-public class SaplingReplanter {
+public final class SaplingReplanter {
 
     private final TimberZ plugin;
     private static final Map<Material, Material> LOG_TO_SAPLING_MAP = new HashMap<>();

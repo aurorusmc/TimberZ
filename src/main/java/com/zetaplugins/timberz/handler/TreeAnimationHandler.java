@@ -9,7 +9,7 @@ import org.bukkit.util.Vector;
 
 import java.util.*;
 
-public class TreeAnimationHandler {
+public final class TreeAnimationHandler {
 
     private final TimberZ plugin;
     private final Random random = new Random();

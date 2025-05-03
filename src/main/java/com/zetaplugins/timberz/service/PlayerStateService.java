@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlayerStateService {
+public final class PlayerStateService {
     private final TimberZ plugin;
     private final String METADATA_KEY = "TimberZ_toggle";
     private final Map<Player, BukkitTask> actionBarTasks = new HashMap<>();

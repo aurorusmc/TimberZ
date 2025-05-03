@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class VersionChecker {
+public final class VersionChecker {
     private static final String MODRINTH_SLUG = "timberz";
     private static final String MODRINTH_ID = "CHANGETHIS";
     private static final String MODRINTH_PROJECT_URL = "https://api.modrinth.com/v2/project/" + MODRINTH_ID;

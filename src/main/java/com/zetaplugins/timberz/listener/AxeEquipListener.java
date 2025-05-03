@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class AxeEquipListener implements Listener {
+public final class AxeEquipListener implements Listener {
     private final TimberZ plugin;
     private final PlayerStateService playerStateService;
 

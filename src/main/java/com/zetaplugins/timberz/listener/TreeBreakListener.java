@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.Damageable;
 
 import java.util.Set;
 
-public class TreeBreakListener implements Listener {
+public final class TreeBreakListener implements Listener {
 
     private final TimberZ plugin;
     private final TreeFellerService TreeFellerService;

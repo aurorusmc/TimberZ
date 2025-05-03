@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
-public class MessageService {
+public final class MessageService {
     private final TimberZ plugin;
 
     public MessageService(TimberZ plugin) {
