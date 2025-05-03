@@ -7,7 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
 
-public class CommandRegistrar {
+public final class CommandRegistrar {
     private final TimberZ plugin;
 
     public CommandRegistrar(TimberZ plugin) {

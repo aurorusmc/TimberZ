@@ -5,7 +5,7 @@ import com.zetaplugins.timberz.service.MessageService;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 
-public class CommandUtils {
+public final class CommandUtils {
     /**
      * Throws a usage error message to the sender.
      * @param sender Command sender

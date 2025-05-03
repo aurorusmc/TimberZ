@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainCommandHandler implements CommandExecutor {
+public final class MainCommandHandler implements CommandExecutor {
     private final TimberZ plugin;
     private final Map<String, SubCommand> commands = new HashMap<>();
 

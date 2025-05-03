@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainTabCompleter implements TabCompleter {
+public final class MainTabCompleter implements TabCompleter {
     private final TimberZ plugin;
 
     public MainTabCompleter(TimberZ plugin) {

@@ -5,7 +5,7 @@ import com.zetaplugins.timberz.commands.SubCommand;
 import com.zetaplugins.timberz.service.MessageService;
 import org.bukkit.command.CommandSender;
 
-public class HelpSubCommand implements SubCommand {
+public final class HelpSubCommand implements SubCommand {
     private final TimberZ plugin;
 
     public HelpSubCommand(TimberZ plugin) {

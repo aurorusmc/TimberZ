@@ -5,7 +5,7 @@ import com.zetaplugins.timberz.commands.CommandUtils;
 import com.zetaplugins.timberz.commands.SubCommand;
 import org.bukkit.command.CommandSender;
 
-public class ReloadSubCommand implements SubCommand {
+public final class ReloadSubCommand implements SubCommand {
     private final TimberZ plugin;
 
     public ReloadSubCommand(TimberZ plugin) {

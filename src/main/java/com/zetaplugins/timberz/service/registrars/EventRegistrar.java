@@ -5,7 +5,7 @@ import com.zetaplugins.timberz.listener.AxeEquipListener;
 import com.zetaplugins.timberz.listener.TreeBreakListener;
 import org.bukkit.event.Listener;
 
-public class EventRegistrar {
+public final class EventRegistrar {
     private final TimberZ plugin;
 
     public EventRegistrar(TimberZ plugin) {
