@@ -6,3 +6,15 @@ load: STARTUP
 authors: [ ZetaPlugins ]
 website: https://zetaplugins.com/
 description: TimberZ - The Ultimate Timber and Lumberjack axe plugin!
+
+commands:
+  timberz:
+    description: Main command for TimberZ
+    aliases:
+      - timber
+      - tz
+
+permissions:
+    timberz.admin:
+        default: op
+        description: Allows the user to manage the plugin

@@ -15,21 +15,15 @@ public final class AxeEquipListener implements Listener {
     private final TimberZ plugin;
     private final PlayerStateService playerStateService;
 
-    public AxeEquipListener(TimberZ plugin, PlayerStateService playerStateService) {
+    public AxeEquipListener(TimberZ plugin) {
         this.plugin = plugin;
-        this.playerStateService = playerStateService;
+        this.playerStateService = plugin.getPlayerStateService();
     }
 
     @EventHandler
     public void onPlayerSwapHandItems(PlayerSwapHandItemsEvent event) {
         Player player = event.getPlayer();
         if (player.isSneaking()) return;
-
-        player.sendMessage(plugin.getMessageService().getAndFormatMsg(
-                true,
-                "testmsg",
-                "&7This is a test message with an %ac%accent &7color."
-        ));
 
         ItemStack main = event.getMainHandItem();
         ItemStack off = event.getOffHandItem();

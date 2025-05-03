@@ -21,10 +21,10 @@ public final class TreeBreakListener implements Listener {
     private final TreeFellerService TreeFellerService;
     private final PlayerStateService playerStateService;
 
-    public TreeBreakListener(TimberZ plugin, TreeFellerService TreeFellerService, PlayerStateService playerStateService) {
+    public TreeBreakListener(TimberZ plugin) {
         this.plugin = plugin;
-        this.TreeFellerService = TreeFellerService;
-        this.playerStateService = playerStateService;
+        this.TreeFellerService = plugin.getTreeFellerService();
+        this.playerStateService = plugin.getPlayerStateService();
     }
 
     @EventHandler

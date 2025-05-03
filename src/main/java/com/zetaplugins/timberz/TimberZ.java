@@ -1,8 +1,8 @@
 package com.zetaplugins.timberz;
 
-import com.zetaplugins.timberz.listener.AxeEquipListener;
-import com.zetaplugins.timberz.listener.TreeBreakListener;
 import com.zetaplugins.timberz.service.*;
+import com.zetaplugins.timberz.service.registrars.CommandRegistrar;
+import com.zetaplugins.timberz.service.registrars.EventRegistrar;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -30,11 +30,8 @@ public final class TimberZ extends JavaPlugin implements Listener {
         this.treeFellerService = new TreeFellerService(this);
         versionChecker.checkForUpdates();
 
-        // Register listeners
-        getServer().getPluginManager().registerEvents(
-                new TreeBreakListener(this, treeFellerService, playerStateService), this);
-        getServer().getPluginManager().registerEvents(
-                new AxeEquipListener(this, playerStateService), this);
+        new EventRegistrar(this).registerListeners();
+        new CommandRegistrar(this).registerCommands();
 
         getServer().getPluginManager().registerEvents(this, this);
 
