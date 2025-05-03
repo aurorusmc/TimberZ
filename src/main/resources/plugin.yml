@@ -1,6 +1,8 @@
 name: TimberZ
-version: '1.0'
+version: '${version}'
 main: com.zetaplugins.timberz.TimberZ
 api-version: '1.21'
 load: STARTUP
-authors: [ zetaplugins ]
+authors: [ ZetaPlugins ]
+website: https://zetaplugins.com/
+description: TimberZ - The Ultimate Timber and Lumberjack axe plugin!
