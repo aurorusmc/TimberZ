@@ -1,0 +1,8 @@
+com.zetaplugins.timberz
+com.zetaplugins.timberz.commands
+com.zetaplugins.timberz.commands.maincommand
+com.zetaplugins.timberz.commands.maincommand.subcommands
+com.zetaplugins.timberz.handler
+com.zetaplugins.timberz.listener
+com.zetaplugins.timberz.service
+com.zetaplugins.timberz.service.registrars
