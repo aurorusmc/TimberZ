@@ -1,8 +1,10 @@
 package com.zetaplugins.timberz;
 
 import com.zetaplugins.timberz.service.*;
+import com.zetaplugins.timberz.service.papi.Metrics;
 import com.zetaplugins.timberz.service.registrars.CommandRegistrar;
 import com.zetaplugins.timberz.service.registrars.EventRegistrar;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -41,6 +43,8 @@ public final class TimberZ extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(this, this);
 
+        initializeBStats();
+
         getLogger().info("TimberZ has been enabled!");
     }
 
@@ -55,6 +59,13 @@ public final class TimberZ extends JavaPlugin implements Listener {
             playerStateService.cleanupAll();
         }
         getLogger().info("TimberZ has been disabled!");
+    }
+
+    private void initializeBStats() {
+        int pluginId = 25743;
+        Metrics metrics = new Metrics(this, pluginId);
+
+        metrics.addCustomChart(new Metrics.SimplePie("language", () -> getConfig().getString("lang")));
     }
 
     public PlayerStateService getPlayerStateService() {
