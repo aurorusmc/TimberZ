@@ -28,7 +28,3 @@ Thumbs.db
 
 *.jar
 !gradle-wrapper.jar
-
-gradle-wrapper.jar
-gradle-wrapper.properties
-gradle
