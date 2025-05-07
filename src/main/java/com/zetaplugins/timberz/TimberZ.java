@@ -1,5 +1,6 @@
 package com.zetaplugins.timberz;
 
+import com.zetaplugins.timberz.dev.DevMode;
 import com.zetaplugins.timberz.service.*;
 import com.zetaplugins.timberz.service.papi.Metrics;
 import com.zetaplugins.timberz.service.registrars.CommandRegistrar;
@@ -20,17 +21,21 @@ public final class TimberZ extends JavaPlugin implements Listener {
     private VersionChecker versionChecker;
     private ConfigService configService;
 
+    private boolean devMode = false;
+
     @Override
     public void onEnable() {
+        // Check if dev mode is enabled via JVM property
+        String mode = System.getProperty("plugin.env", "release");
+        devMode = mode.equalsIgnoreCase("dev");
+
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
         this.localizationService = new LocalizationService(this);
         this.messageService = new MessageService(this);
-
         this.versionChecker = new VersionChecker(this);
         this.configService = new ConfigService(this);
-
         this.playerStateService = new PlayerStateService(this);
         this.treeFellerService = new TreeFellerService(this);
         this.treeDetectionService = new TreeDetectionService(this);
@@ -44,6 +49,10 @@ public final class TimberZ extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
 
         initializeBStats();
+
+        if (devMode) {
+            new DevMode(this).enable();
+        }
 
         getLogger().info("TimberZ has been enabled!");
     }

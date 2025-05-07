@@ -16,7 +16,7 @@ bin/
 .vscode/
 *.code-workspace
 
-run
+
 logs/
 *.log
 
@@ -28,3 +28,12 @@ Thumbs.db
 
 *.jar
 !gradle-wrapper.jar
+
+
+# -- DEV BUILD -- #
+
+run/*
+
+!run/eula.txt
+!run/server.properties
+!*.md
