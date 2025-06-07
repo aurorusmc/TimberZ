@@ -1,11 +1,11 @@
 package com.zetaplugins.timberz;
 
+import com.zetaplugins.timberz.commands.TimberZCommand;
 import com.zetaplugins.timberz.dev.DevMode;
 import com.zetaplugins.timberz.service.*;
 import com.zetaplugins.timberz.service.papi.Metrics;
-import com.zetaplugins.timberz.service.registrars.CommandRegistrar;
 import com.zetaplugins.timberz.service.registrars.EventRegistrar;
-import org.bukkit.Bukkit;
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +44,7 @@ public final class TimberZ extends JavaPlugin implements Listener {
         versionChecker.checkForUpdates();
 
         new EventRegistrar(this).registerListeners();
-        new CommandRegistrar(this).registerCommands();
+        registerCommands();
 
         getServer().getPluginManager().registerEvents(this, this);
 
@@ -68,6 +68,12 @@ public final class TimberZ extends JavaPlugin implements Listener {
             playerStateService.cleanupAll();
         }
         getLogger().info("TimberZ has been disabled!");
+    }
+
+    private void registerCommands() {
+        this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
+            commands.registrar().register(new TimberZCommand(this).buildRootCommand());
+        });
     }
 
     private void initializeBStats() {

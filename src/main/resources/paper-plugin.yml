@@ -1,18 +1,12 @@
 name: TimberZ
 version: '${version}'
 main: com.zetaplugins.timberz.TimberZ
+bootstrapper: com.zetaplugins.timberz.bootstrap.TimberZBootstrap
 api-version: '1.21'
 load: STARTUP
 authors: [ ZetaPlugins ]
 website: https://zetaplugins.com/
 description: TimberZ - The Ultimate Timber and Lumberjack axe plugin!
-
-commands:
-  timberz:
-    description: Main command for TimberZ
-    aliases:
-      - timber
-      - tz
 
 permissions:
     timberz.admin:
