@@ -4,6 +4,7 @@ import com.zetaplugins.timberz.commands.TimberZCommand;
 import com.zetaplugins.timberz.dev.DevMode;
 import com.zetaplugins.timberz.service.*;
 import com.zetaplugins.timberz.service.bstats.Metrics;
+import com.zetaplugins.timberz.service.papi.PapiExpansion;
 import com.zetaplugins.timberz.service.registrars.EventRegistrar;
 import com.zetaplugins.timberz.service.worldguard.WorldGuardManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
@@ -66,6 +67,12 @@ public final class TimberZ extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
 
         initializeBStats();
+
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            getLogger().info("PlaceholderAPI found! Registering placeholders...");
+            new PapiExpansion(this).register();
+            getLogger().info("Placeholders registered successfully!");
+        }
 
         if (devMode) {
             new DevMode(this).enable();
