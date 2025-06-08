@@ -35,6 +35,14 @@ public final class TimberZ extends JavaPlugin implements Listener {
     public void onLoad() {
         getLogger().info("Loading TimberZ...");
 
+        if (Bukkit.getName().toLowerCase().contains("spigot") || Bukkit.getName().toLowerCase().contains("craftbukkit")) {
+            getLogger().severe("---------------------------------------------------");
+            getLogger().severe("TimberZ does not support Spigot or Bukkit!");
+            getLogger().severe("Please use Paper or any fork of Paper (like Purpur). If you need further assistance, please join our Discord server:");
+            getLogger().severe("https://strassburger.org/discord");
+            getLogger().severe("---------------------------------------------------");
+        }
+
         if (hasWorldGuard()) {
             getLogger().info("WorldGuard found! Enabling WorldGuard support...");
             worldGuardManager = new WorldGuardManager();
