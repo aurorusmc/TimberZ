@@ -1,6 +1,8 @@
 package com.zetaplugins.timberz.service;
 
 import com.zetaplugins.timberz.TimberZ;
+import com.zetaplugins.timberz.service.worldguard.WorldGuardManager;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -23,9 +25,25 @@ public final class PlayerStateService {
     }
 
     public boolean isAllowedToTimber(Player player) {
-        boolean toggleTimber = plugin.getConfig().getBoolean("toggleTimber");
-        if (toggleTimber) return getToggleMetadata(player);
-        else return true;
+        boolean isTimberToggleEnabled = plugin.getConfig().getBoolean("toggleTimber");
+        boolean toggleMetadata = getToggleMetadata(player);
+
+        if (isTimberToggleEnabled && !toggleMetadata) return false;
+
+        boolean timberWorldguardFlag = WorldGuardManager.checkTimberFlag(player, plugin);
+
+        if (!timberWorldguardFlag) {
+            if (plugin.getConfig().getBoolean("messageOnRegionViolation")) {
+                player.sendMessage(plugin.getMessageService().getAndFormatMsg(
+                        false,
+                        "noTimberInThisRegion",
+                        "&cYou cannot use TimberZ in this region!"
+                ));
+            }
+            return false;
+        }
+
+        return true;
     }
 
     private boolean getToggleMetadata(Player player) {

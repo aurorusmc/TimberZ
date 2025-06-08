@@ -13,7 +13,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class TimberZBootstrap implements PluginBootstrap {
+public final class TimberZBootstrap implements PluginBootstrap {
     @Override
     public void bootstrap(BootstrapContext context) {
         context.getLifecycleManager().registerEventHandler(RegistryEvents.ENCHANTMENT.freeze().newHandler(event -> {

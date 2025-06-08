@@ -3,9 +3,11 @@ package com.zetaplugins.timberz;
 import com.zetaplugins.timberz.commands.TimberZCommand;
 import com.zetaplugins.timberz.dev.DevMode;
 import com.zetaplugins.timberz.service.*;
-import com.zetaplugins.timberz.service.papi.Metrics;
+import com.zetaplugins.timberz.service.bstats.Metrics;
 import com.zetaplugins.timberz.service.registrars.EventRegistrar;
+import com.zetaplugins.timberz.service.worldguard.WorldGuardManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -20,8 +22,23 @@ public final class TimberZ extends JavaPlugin implements Listener {
     private TreeDetectionService treeDetectionService;
     private VersionChecker versionChecker;
     private ConfigService configService;
+    private WorldGuardManager worldGuardManager;
+    private final boolean hasWorldGuard = Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
 
     private boolean devMode = false;
+
+    @Override
+    public void onLoad() {
+        getLogger().info("Loading TimberZ...");
+
+        if (hasWorldGuard()) {
+            getLogger().info("WorldGuard found! Enabling WorldGuard support...");
+            worldGuardManager = new WorldGuardManager();
+            getLogger().info("WorldGuard support enabled!");
+        } else {
+            getLogger().warning("WorldGuard not found! Disabling WorldGuard support.");
+        }
+    }
 
     @Override
     public void onEnable() {
@@ -109,5 +126,13 @@ public final class TimberZ extends JavaPlugin implements Listener {
 
     public ConfigService getConfigService() {
         return configService;
+    }
+
+    public WorldGuardManager getWorldGuardManager() {
+        return worldGuardManager;
+    }
+
+    public boolean hasWorldGuard() {
+        return hasWorldGuard;
     }
 }

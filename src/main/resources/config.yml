@@ -52,6 +52,9 @@ durabilityMultiplier: 1.0
 # The minimum durability the axe must have after cutting down a tree
 minDurability: 10
 
+# Send a message to the player when they try to use timber mode in a WorldGuard region that does not allow it
+messageOnRegionViolation: false
+
 
 # === TREE DETECTION ===
 
