@@ -42,6 +42,8 @@ TimberZ supports WorldGuard, allowing you to restrict TimberZ usage in certain r
 
 ## Configuration
 
+You can find the configuration files in the `plugins/TimberZ` folder. The main configuration file is `config.yml`, and you can also find a `blocks.yml` file that contains the block mappings for logs, leaves, and saplings.
+
 <details>
 <summary>config.yml</summary>
 
