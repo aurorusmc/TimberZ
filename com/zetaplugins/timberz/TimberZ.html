@@ -151,18 +151,27 @@ implements org.bukkit.event.Listener</span></div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="service/VersionChecker.html" title="class in com.zetaplugins.timberz.service">VersionChecker</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionChecker()" class="member-name-link">getVersionChecker</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="service/worldguard/WorldGuardManager.html" title="class in com.zetaplugins.timberz.service.worldguard">WorldGuardManager</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWorldGuardManager()" class="member-name-link">getWorldGuardManager</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasWorldGuard()" class="member-name-link">hasWorldGuard</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onDisable()" class="member-name-link">onDisable</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onEnable()" class="member-name-link">onEnable</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onLoad()" class="member-name-link">onLoad</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.bukkit.plugin.java.JavaPlugin">Methods inherited from class&nbsp;org.bukkit.plugin.java.JavaPlugin</h3>
-<code>getClassLoader, getCommand, getConfig, getDataFolder, getDefaultBiomeProvider, getDefaultWorldGenerator, getDescription, getFile, getLifecycleManager, getLogger, getPlugin, getPluginLoader, getPluginMeta, getProvidingPlugin, getResource, getServer, getTextResource, init, init, isEnabled, isNaggable, onCommand, onLoad, onTabComplete, registerCommand, registerCommand, registerCommand, registerCommand, reloadConfig, saveConfig, saveDefaultConfig, saveResource, setEnabled, setNaggable, toString</code></div>
+<code>getClassLoader, getCommand, getConfig, getDataFolder, getDefaultBiomeProvider, getDefaultWorldGenerator, getDescription, getFile, getLifecycleManager, getLogger, getPlugin, getPluginLoader, getPluginMeta, getProvidingPlugin, getResource, getServer, getTextResource, init, init, isEnabled, isNaggable, onCommand, onTabComplete, registerCommand, registerCommand, registerCommand, registerCommand, reloadConfig, saveConfig, saveDefaultConfig, saveResource, setEnabled, setNaggable, toString</code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.bukkit.plugin.PluginBase">Methods inherited from class&nbsp;org.bukkit.plugin.PluginBase</h3>
 <code>equals, getName, hashCode</code></div>
@@ -197,6 +206,18 @@ implements org.bukkit.event.Listener</span></div>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="onLoad()">
+<h3>onLoad</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onLoad</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code>onLoad</code>&nbsp;in interface&nbsp;<code>org.bukkit.plugin.Plugin</code></dd>
+<dt>Overrides:</dt>
+<dd><code>onLoad</code>&nbsp;in class&nbsp;<code>org.bukkit.plugin.java.JavaPlugin</code></dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="onEnable()">
 <h3>onEnable</h3>
@@ -272,6 +293,18 @@ implements org.bukkit.event.Listener</span></div>
 <section class="detail" id="getConfigService()">
 <h3>getConfigService</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="service/ConfigService.html" title="class in com.zetaplugins.timberz.service">ConfigService</a></span>&nbsp;<span class="element-name">getConfigService</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getWorldGuardManager()">
+<h3>getWorldGuardManager</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="service/worldguard/WorldGuardManager.html" title="class in com.zetaplugins.timberz.service.worldguard">WorldGuardManager</a></span>&nbsp;<span class="element-name">getWorldGuardManager</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasWorldGuard()">
+<h3>hasWorldGuard</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasWorldGuard</span>()</div>
 </section>
 </li>
 </ul>
