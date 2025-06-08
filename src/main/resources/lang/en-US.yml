@@ -1,5 +1,5 @@
 prefix: "&8[<gradient:#00D26A:#00B24F>TimberZ&8]"
-help: "\n &8<b>></b> <#00D26A><b><gradient:#00D26A:#00B24F>ServerLinksZ</gradient></b></#00D26A> <grey>v%version%</grey>\n\n <click:OPEN_URL:https://docs.zetaplugins.com/timberz>%ac%<u><b>Docs</b></u></click> <click:OPEN_URL:https://strassburger.org/discord>%ac%<u><b>Support Discord</b></u></click>\n"
+help: "\n &8<b>></b> <#00D26A><b><gradient:#00D26A:#00B24F>ServerLinksZ</gradient></b></#00D26A> <grey>v%version%</grey>\n\n <click:OPEN_URL:https://docs.zetaplugins.com/timberz>%ac%<u><b>Documentation</b></u></click>   <click:OPEN_URL:https://strassburger.org/discord>%ac%<u><b>Support Discord</b></u></click>\n"
 versionMsg: "&7You are using version %ac%%version%&7"
 cannotDragAxesIntoOffHand: "&cYou cannot drag axes into your offhand!"
 timberModeOn: "&7Timber: &aON&7"

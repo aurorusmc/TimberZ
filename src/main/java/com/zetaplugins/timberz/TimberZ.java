@@ -89,7 +89,8 @@ public final class TimberZ extends JavaPlugin implements Listener {
 
     private void registerCommands() {
         this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
-            commands.registrar().register(new TimberZCommand(this).buildRootCommand());
+            commands.registrar().register(new TimberZCommand(this).buildRootCommand("timberz"));
+            commands.registrar().register(new TimberZCommand(this).buildRootCommand("tz"));
         });
     }
 
