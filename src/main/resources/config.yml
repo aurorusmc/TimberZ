@@ -57,6 +57,11 @@ minDurability: 10
 # Send a message to the player when they try to use timber mode in a WorldGuard region that does not allow it
 messageOnRegionViolation: false
 
+# If using AuraSkills, you can have a custom XP multiplier for the Foraging skill
+# Example: If you set this to 2.0, players will receive double the XP for using TimberZ
+# Example2: If you set this to 0.5, players will receive half the XP for using TimberZ
+auraSkillsXPMultiplier: 1.0
+
 
 # === TREE DETECTION ===
 

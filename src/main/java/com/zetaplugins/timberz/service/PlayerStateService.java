@@ -31,16 +31,18 @@ public final class PlayerStateService {
         boolean toggleMetadata = getToggleMetadata(player);
         if (isTimberToggleEnabled && !toggleMetadata) return false;
 
-        boolean timberWorldguardFlag = WorldGuardManager.checkTimberFlag(player, plugin);
-        if (!timberWorldguardFlag) {
-            if (plugin.getConfig().getBoolean("messageOnRegionViolation")) {
-                player.sendMessage(plugin.getMessageService().getAndFormatMsg(
-                        false,
-                        "noTimberInThisRegion",
-                        "&cYou cannot use TimberZ in this region!"
-                ));
+        if (plugin.hasWorldGuard()) {
+            boolean timberWorldguardFlag = WorldGuardManager.checkTimberFlag(player, plugin);
+            if (!timberWorldguardFlag) {
+                if (plugin.getConfig().getBoolean("messageOnRegionViolation")) {
+                    player.sendMessage(plugin.getMessageService().getAndFormatMsg(
+                            false,
+                            "noTimberInThisRegion",
+                            "&cYou cannot use TimberZ in this region!"
+                    ));
+                }
+                return false;
             }
-            return false;
         }
 
         return true;

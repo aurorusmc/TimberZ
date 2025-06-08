@@ -40,6 +40,10 @@ TimberZ supports PlaceholderAPI, allowing you to use placeholders in your messag
 
 TimberZ supports WorldGuard, allowing you to restrict TimberZ usage in certain regions. You can use the `timber` flag to allow or disallow TimberZ usage in a region.
 
+### ✅ AuraSkills
+
+Using TimberZ with AuraSkills, gives players the correct amount of experience when cutting down trees. You can also add a custom XP multiplier to the TimberZ configuration file.
+
 ## Configuration
 
 You can find the configuration files in the `plugins/TimberZ` folder. The main configuration file is `config.yml`, and you can also find a `blocks.yml` file that contains the block mappings for logs, leaves, and saplings.
@@ -92,7 +96,7 @@ restrictAxeModelData: false
 
 # If restrictAxeModelData is set to true, you can only use axes with a customModelData value in this list
 allowedModelData:
-- 100
+  - 100
 
 # If set to true, TimberZ will replant the tree after cutting it down
 replant: true
@@ -106,6 +110,11 @@ minDurability: 10
 
 # Send a message to the player when they try to use timber mode in a WorldGuard region that does not allow it
 messageOnRegionViolation: false
+
+# If using AuraSkills, you can have a custom XP multiplier for the Foraging skill
+# Example: If you set this to 2.0, players will receive double the XP for using TimberZ
+# Example2: If you set this to 0.5, players will receive half the XP for using TimberZ
+auraSkillsXPMultiplier: 1.0
 
 
 # === TREE DETECTION ===

@@ -3,6 +3,7 @@ package com.zetaplugins.timberz;
 import com.zetaplugins.timberz.commands.TimberZCommand;
 import com.zetaplugins.timberz.dev.DevMode;
 import com.zetaplugins.timberz.service.*;
+import com.zetaplugins.timberz.service.auraskills.AuraSkillsManager;
 import com.zetaplugins.timberz.service.bstats.Metrics;
 import com.zetaplugins.timberz.service.papi.PapiExpansion;
 import com.zetaplugins.timberz.service.registrars.EventRegistrar;
@@ -24,7 +25,9 @@ public final class TimberZ extends JavaPlugin implements Listener {
     private VersionChecker versionChecker;
     private ConfigService configService;
     private WorldGuardManager worldGuardManager;
+    private AuraSkillsManager auraSkillsManager;
     private final boolean hasWorldGuard = Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
+    private final boolean hasAuraSkills = Bukkit.getPluginManager().getPlugin("AuraSkills") != null;
 
     private boolean devMode = false;
 
@@ -72,6 +75,12 @@ public final class TimberZ extends JavaPlugin implements Listener {
             getLogger().info("PlaceholderAPI found! Registering placeholders...");
             new PapiExpansion(this).register();
             getLogger().info("Placeholders registered successfully!");
+        }
+
+        if (hasAuraSkills) {
+            getLogger().info("AuraSkills found! Enabling AuraSkills support...");
+            this.auraSkillsManager = new AuraSkillsManager(this);
+            getLogger().info("AuraSkills support enabled!");
         }
 
         if (devMode) {
@@ -142,5 +151,13 @@ public final class TimberZ extends JavaPlugin implements Listener {
 
     public boolean hasWorldGuard() {
         return hasWorldGuard;
+    }
+
+    public AuraSkillsManager getAuraSkillsManager() {
+        return auraSkillsManager;
+    }
+
+    public boolean hasAuraSkills() {
+        return hasAuraSkills;
     }
 }

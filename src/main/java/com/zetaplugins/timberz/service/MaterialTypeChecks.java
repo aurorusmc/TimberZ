@@ -49,9 +49,6 @@ public final class MaterialTypeChecks {
         }
 
         if (plugin.getConfig().getBoolean("requireCustomEnchant")) {
-            System.out.println(
-                "Checking for custom enchantments on item: " + item.getType()
-            );
             Map<Enchantment, Integer> enchants = item.getEnchantments();
             Set<String> enchantKeys = enchants.keySet().stream()
                 .map(Enchantment::getKey)

@@ -51,6 +51,7 @@ public final class TreeBreakListener implements Listener {
                     // Calculate durability cost
                     int logsCount = treeBlocks.size();
                     int durabilityCost = calculateDurabilityCost(logsCount);
+                    if (plugin.hasAuraSkills()) plugin.getAuraSkillsManager().giveAuraSkillsXP(player, treeBlocks);
 
                     // Check if tool has enough durability
                     if (hasEnoughDurability(handItem, durabilityCost)) {
