@@ -32,10 +32,13 @@ accentColor: "<#00D26A>"
 # If set to true, players can enable or disable timber mode by pressing F with a qualifying axe in hand
 toggleTimber: true
 
-# If set to true, you can only use axes with a customModelData value in the list below
-restrictAxes: false
+# If set to true, you can only use axes that have the "Timber" enchantment which can be applied like a normal Enchantment.
+requireCustomEnchant: true
 
-# If restrictAxes is set to true, you can only use axes with a customModelData value in this list
+# If set to true, you can only use axes with a customModelData value in the list below
+restrictAxeModelData: false
+
+# If restrictAxeModelData is set to true, you can only use axes with a customModelData value in this list
 allowedModelData:
   - 100
 

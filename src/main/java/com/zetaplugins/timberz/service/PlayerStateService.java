@@ -40,17 +40,6 @@ public final class PlayerStateService {
         return false;
     }
 
-    private boolean isValidAxe(ItemStack item, FileConfiguration config) {
-        if (item == null) return false;
-        if (!config.getBoolean("restrictAxes")) return true;
-        List<Integer> allowedModelData = config.getIntegerList("allowedModelData");
-        if (!item.getItemMeta().hasCustomModelData()) return false;
-        int itemCustomModelData = item.getItemMeta().getCustomModelData();
-        System.out.println("Item Custom Model Data: " + itemCustomModelData);
-
-        return allowedModelData.contains(itemCustomModelData);
-    }
-
     public void setTimberEnabled(Player player, boolean state) {
         player.setMetadata(METADATA_KEY, new FixedMetadataValue(plugin, state));
 
