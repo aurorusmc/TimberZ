@@ -119,8 +119,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>com.mojang.brigadier.tree.LiteralCommandNode<wbr>&lt;io.papermc.paper.command.brigadier.CommandSourceStack&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildRootCommand()" class="member-name-link">buildRootCommand</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildRootCommand(java.lang.String)" class="member-name-link">buildRootCommand</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;commandName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Builds the root command for TimberZ.</div>
+</div>
 </div>
 </div>
 </div>
@@ -153,9 +155,16 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="buildRootCommand()">
+<section class="detail" id="buildRootCommand(java.lang.String)">
 <h3>buildRootCommand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">com.mojang.brigadier.tree.LiteralCommandNode&lt;io.papermc.paper.command.brigadier.CommandSourceStack&gt;</span>&nbsp;<span class="element-name">buildRootCommand</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">com.mojang.brigadier.tree.LiteralCommandNode&lt;io.papermc.paper.command.brigadier.CommandSourceStack&gt;</span>&nbsp;<span class="element-name">buildRootCommand</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;commandName)</span></div>
+<div class="block">Builds the root command for TimberZ.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>commandName</code> - the name of the command, e.g., "timberz"</dd>
+<dt>Returns:</dt>
+<dd>a LiteralCommandNode representing the root command</dd>
+</dl>
 </section>
 </li>
 </ul>
