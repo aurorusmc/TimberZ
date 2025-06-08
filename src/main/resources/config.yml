@@ -29,6 +29,8 @@ accentColor: "<#00D26A>"
 
 # === TIMBER SETTINGS ===
 
+# Regardless of the settings below, you can disallow TimberZ for a specific player by disallowing them the "timberz.usetimber" permission.
+
 # If set to true, players can enable or disable timber mode by pressing F with a qualifying axe in hand
 toggleTimber: true
 

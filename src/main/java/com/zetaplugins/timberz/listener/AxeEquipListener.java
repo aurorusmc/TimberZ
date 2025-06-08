@@ -31,14 +31,7 @@ public final class AxeEquipListener implements Listener {
         Player player = event.getPlayer();
         if (player.isSneaking()) return;
 
-        if (!player.hasPermission("timberz.useTimber") && plugin.getConfig().getBoolean("toggleTimber")) {
-            player.sendMessage(plugin.getMessageService().getAndFormatMsg(
-                    false,
-                    "noTimberPermissionError",
-                    "&cYou do not have permission to use TimberZ!"
-            ));
-            return;
-        }
+        if (!player.hasPermission("timberz.useTimber") && plugin.getConfig().getBoolean("toggleTimber")) return;
 
         if (!plugin.getConfig().getBoolean("toggleTimber")) return;
 

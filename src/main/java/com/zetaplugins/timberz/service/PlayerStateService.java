@@ -25,13 +25,13 @@ public final class PlayerStateService {
     }
 
     public boolean isAllowedToTimber(Player player) {
+        if (!player.hasPermission("timberz.usetimber")) return false;
+
         boolean isTimberToggleEnabled = plugin.getConfig().getBoolean("toggleTimber");
         boolean toggleMetadata = getToggleMetadata(player);
-
         if (isTimberToggleEnabled && !toggleMetadata) return false;
 
         boolean timberWorldguardFlag = WorldGuardManager.checkTimberFlag(player, plugin);
-
         if (!timberWorldguardFlag) {
             if (plugin.getConfig().getBoolean("messageOnRegionViolation")) {
                 player.sendMessage(plugin.getMessageService().getAndFormatMsg(
