@@ -6,5 +6,6 @@ com.zetaplugins.timberz.handler
 com.zetaplugins.timberz.listener
 com.zetaplugins.timberz.service
 com.zetaplugins.timberz.service.bstats
+com.zetaplugins.timberz.service.papi
 com.zetaplugins.timberz.service.registrars
 com.zetaplugins.timberz.service.worldguard
