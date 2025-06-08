@@ -2,6 +2,7 @@ package com.zetaplugins.timberz.service.registrars;
 
 import com.zetaplugins.timberz.TimberZ;
 import com.zetaplugins.timberz.listener.AxeEquipListener;
+import com.zetaplugins.timberz.listener.PlayerJoinListener;
 import com.zetaplugins.timberz.listener.TreeBreakListener;
 import org.bukkit.event.Listener;
 
@@ -18,6 +19,7 @@ public final class EventRegistrar {
     public void registerListeners() {
         registerListener(new TreeBreakListener(plugin));
         registerListener(new AxeEquipListener(plugin));
+        registerListener(new PlayerJoinListener(plugin));
     }
 
     /**

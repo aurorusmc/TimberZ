@@ -63,14 +63,13 @@ public final class TimberZ extends JavaPlugin implements Listener {
 
         this.localizationService = new LocalizationService(this);
         this.messageService = new MessageService(this);
-        this.versionChecker = new VersionChecker(this);
+        this.versionChecker = new VersionChecker(this, "hjNMOOnF");
         this.configService = new ConfigService(this);
         this.playerStateService = new PlayerStateService(this);
         this.treeFellerService = new TreeFellerService(this);
         this.treeDetectionService = new TreeDetectionService(this);
 
         configService.initConfigs();
-        versionChecker.checkForUpdates();
 
         new EventRegistrar(this).registerListeners();
         registerCommands();
