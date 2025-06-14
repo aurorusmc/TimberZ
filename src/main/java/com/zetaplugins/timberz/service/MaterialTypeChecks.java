@@ -55,7 +55,7 @@ public final class MaterialTypeChecks {
                 .map(Object::toString)
                 .collect(Collectors.toSet());
 
-            if (!enchantKeys.contains("lifestealz:timber")) return false;
+            if (!enchantKeys.contains("timberz:timber")) return false;
         }
 
         return true;

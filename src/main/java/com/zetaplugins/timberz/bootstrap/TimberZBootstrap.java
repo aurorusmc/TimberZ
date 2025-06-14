@@ -18,7 +18,7 @@ public final class TimberZBootstrap implements PluginBootstrap {
     public void bootstrap(BootstrapContext context) {
         context.getLifecycleManager().registerEventHandler(RegistryEvents.ENCHANTMENT.freeze().newHandler(event -> {
             event.registry().register(
-                    EnchantmentKeys.create(Key.key("lifestealz:timber")),
+                    EnchantmentKeys.create(Key.key("timberz:timber")),
                     b -> {
                         b
                                 .maxLevel(1)

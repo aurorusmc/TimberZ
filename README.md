@@ -16,10 +16,12 @@ TimberZ is a Minecraft plugin that let's you cut down trees in an instant. You c
 - ✅ Custom Enchantment
 - ✅ Customizable Tree Types
 - ✅ Cutting down animation
+- ✅ Instant Leaf Decay
 - ✅ Toggleable Timber mode
 - ✅ Custom item support
 - ✅ HEX Colors
 - ✅ Highly customizable
+- ✅ Customizable messages
 - ✅ Easy setup
 - ✅ Multiple languages
 
@@ -68,7 +70,7 @@ You can find the configuration files in the `plugins/TimberZ` folder. The main c
 
 # === GENERAL SETTINGS ===
 
-# If set to true, LifeStealZ will check for updates and let you know if there's a newer version
+# If set to true, TimberZ will check for updates and let you know if there's a newer version
 checkForUpdates: true
 
 # Set the language to any code found in the "lang" folder (don't add the .yml extension)
@@ -97,6 +99,9 @@ restrictAxeModelData: false
 # If restrictAxeModelData is set to true, you can only use axes with a customModelData value in this list
 allowedModelData:
   - 100
+
+# If set to true, Leaves will decay instantly when cutting down a tree
+instantLeafDecay: true
 
 # If set to true, TimberZ will replant the tree after cutting it down
 replant: true

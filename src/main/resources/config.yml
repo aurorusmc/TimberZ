@@ -14,7 +14,7 @@
 
 # === GENERAL SETTINGS ===
 
-# If set to true, LifeStealZ will check for updates and let you know if there's a newer version
+# If set to true, TimberZ will check for updates and let you know if there's a newer version
 checkForUpdates: true
 
 # Set the language to any code found in the "lang" folder (don't add the .yml extension)
