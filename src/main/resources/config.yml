@@ -44,6 +44,9 @@ restrictAxeModelData: false
 allowedModelData:
   - 100
 
+# If set to true, Leaves will decay instantly when cutting down a tree
+instantLeafDecay: true
+
 # If set to true, TimberZ will replant the tree after cutting it down
 replant: true
 
