@@ -1,0 +1,94 @@
+name: Publish to Modrinth and GitHub Releases
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'gradle'
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Get release version
+        id: get_version
+        run: echo "version=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+
+      - name: Set version from release tag
+        run: |
+          sed -i "s/^version = .*/version = '${{ github.event.release.tag_name }}'/" gradle.properties
+
+      - name: Grant execute permission for Gradle
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TimberZ-jar
+          path: build/libs/TimberZ-${{ github.event.release.tag_name }}.jar
+
+  upload_release_asset:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: TimberZ-jar
+          path: build/libs/
+
+      - name: Upload JAR to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/libs/TimberZ-${{ github.event.release.tag_name }}.jar
+          body: ${{ github.event.release.body }}
+
+  publish_modrinth:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: TimberZ-jar
+          path: build/libs/
+
+      - name: Publish to Modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project: 'hjNMOOnF'
+          version: ${{ github.event.release.tag_name }}
+          name: 'TimberZ ${{ github.event.release.tag_name }}'
+          changelog: ${{ github.event.release.body }}
+          files: '["build/libs/TimberZ-${{ github.event.release.tag_name }}.jar"]'
+          loaders: |-
+            paper
+            purpur
+          game-versions: |-
+            1.21.x
+          status: 'listed'
+          channel: 'release'
