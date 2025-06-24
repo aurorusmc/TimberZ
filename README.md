@@ -76,7 +76,7 @@ checkForUpdates: true
 # Set the language to any code found in the "lang" folder (don't add the .yml extension)
 # You can add your own language files. Use https://github.com/ZetaPlugins/TimberZ/tree/main/src/main/resources/lang/en-US.yml as a template
 # If you want to help translating the plugin, please refer to this article: https://docs.zetaplugins.com/#contributing
-#  | en-US | de-DE |
+#  | en-US | de-DE | pl-PL | ru-RU |
 lang: "en-US"
 
 # The accent color of the plugin. This color replaces %ac% in the lang files.
@@ -112,6 +112,13 @@ durabilityMultiplier: 1.0
 
 # The minimum durability the axe must have after cutting down a tree
 minDurability: 10
+
+# If set to true, Players will need to use an axe (defined in the blocks.yml file) to use TimberZ
+# When this is set to false, you can no longer toggle TimberZ by pressing F
+requireAxeMaterial: true
+
+# If set to true, you can insta mine leaves when the TimberZ conditions are met
+instaBreakLeavesWithTimber: false
 
 # Send a message to the player when they try to use timber mode in a WorldGuard region that does not allow it
 messageOnRegionViolation: false
