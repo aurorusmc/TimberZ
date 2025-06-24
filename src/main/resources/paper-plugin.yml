@@ -6,7 +6,7 @@ api-version: '1.21'
 load: POSTWORLD
 authors: [ ZetaPlugins ]
 website: https://zetaplugins.com/
-description: TimberZ - The Ultimate Timber and Lumberjack axe plugin!
+description: The Ultimate Timber and Lumberjack axe plugin!
 
 dependencies:
     server:
