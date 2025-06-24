@@ -57,6 +57,9 @@ durabilityMultiplier: 1.0
 # The minimum durability the axe must have after cutting down a tree
 minDurability: 10
 
+# If set to true, you can insta mine leaves when the TimberZ conditions are met
+instaBreakLeavesWithTimber: false
+
 # Send a message to the player when they try to use timber mode in a WorldGuard region that does not allow it
 messageOnRegionViolation: false
 
