@@ -39,7 +39,9 @@ public final class MaterialTypeChecks {
     }
 
     public static boolean isValidAxe(ItemStack item, TimberZ plugin) {
-        if (item == null || !isAxe(item.getType(), plugin.getConfigService().getBlocksConfig())) return false;
+        boolean isAxe = isAxe(item.getType(), plugin.getConfigService().getBlocksConfig());
+        boolean requireAxeMaterial = plugin.getConfig().getBoolean("requireAxeMaterial");
+        if (item == null || (!isAxe && requireAxeMaterial)) return false;
 
         if (plugin.getConfig().getBoolean("restrictAxeModelData")) {
             if (!item.getItemMeta().hasCustomModelData()) return false;

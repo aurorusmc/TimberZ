@@ -79,8 +79,12 @@ public final class TreeBreakListener implements Listener {
     }
 
     private boolean hasEnoughDurability(ItemStack tool, int durabilityCost) {
+        int maxDurability = tool.getType().getMaxDurability();
+        if (maxDurability <= 0) {
+            return true; // If the item has no durability (like non-damageable items), we assume it's always sufficient
+        }
+
         if (tool.getItemMeta() instanceof Damageable meta) {
-            int maxDurability = tool.getType().getMaxDurability();
             int currentDamage = meta.getDamage();
             int remainingDurability = maxDurability - currentDamage;
 
@@ -88,6 +92,8 @@ public final class TreeBreakListener implements Listener {
             // Check if we would have at least 10 durability left after the operation
             return remainingDurability - durabilityCost >= minDurability;
         }
-        return false;
+
+        if (!plugin.getConfig().getBoolean("requireAxeMaterial")) return true;// If axe material is not required, we assume durability is not a concern
+        else return false;
     }
 }
