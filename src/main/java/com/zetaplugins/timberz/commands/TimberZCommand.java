@@ -8,6 +8,8 @@ import com.zetaplugins.timberz.TimberZ;
 import com.zetaplugins.timberz.service.MessageService;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public final class TimberZCommand {
     private final TimberZ plugin;
@@ -22,20 +24,23 @@ public final class TimberZCommand {
      * @return a LiteralCommandNode representing the root command
      */
     public LiteralCommandNode<CommandSourceStack> buildRootCommand(String commandName) {
+        boolean isToggleEnabled = plugin.getConfig().getBoolean("toggleTimber");
+
         LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal(commandName);
 
         root
-                .requires(source -> source.getSender().hasPermission("customplugin.use"))
                 .executes(this::executeVersion);
 
         root.then(Commands.literal("reload")
-                .requires(source -> source.getSender().hasPermission("customplugin.admin"))
+                .requires(source -> source.getSender().hasPermission("timberz.admin"))
                 .executes(this::executeReload));
 
         root.then(Commands.literal("help")
-                .requires(source -> true)
                 .executes(this::executeHelp));
 
+        root.then(Commands.literal("toggle")
+                .requires(source -> source.getSender().hasPermission("timberz.usetimber") && isToggleEnabled)
+                .executes(this::executeToggle));
 
         return root.build();
     }
@@ -78,6 +83,22 @@ public final class TimberZCommand {
                 "reloadMsg",
                 "&7Successfully reloaded the plugin!"
         ));
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private int executeToggle(CommandContext<CommandSourceStack> context) {
+        CommandSender sender = context.getSource().getSender();
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(plugin.getMessageService().getAndFormatMsg(
+                    false,
+                    "playerOnlyCommand",
+                    "This command can only be used by players!"
+            ));
+            return Command.SINGLE_SUCCESS;
+        }
+
+        plugin.getPlayerStateService().toggleTimberState(player);
+
         return Command.SINGLE_SUCCESS;
     }
 }
