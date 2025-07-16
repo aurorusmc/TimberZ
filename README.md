@@ -46,9 +46,9 @@ TimberZ supports WorldGuard, allowing you to restrict TimberZ usage in certain r
 
 Using TimberZ with AuraSkills, gives players the correct amount of experience when cutting down trees. You can also add a custom XP multiplier to the TimberZ configuration file.
 
-### ✅ mcMMo
+### ✅ mcMMO
 
-Using TimberZ with mcMMo, gives players the correct amount of experience when cutting down trees. 
+Using TimberZ with mcMMO, gives players the correct amount of experience when cutting down trees. 
 
 ## Configuration
 
