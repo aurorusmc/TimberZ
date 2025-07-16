@@ -18,8 +18,7 @@ public class McMMoManager {
     }
 
     public void giveMcMMoXP(Player player, Set<Block> blocksBroken) {
-
-
+        
         //noinspection deprecation
         McMMOPlayer mcMMOPlayer = new McMMOPlayer(player, new PlayerProfile(player.getName(), player.getUniqueId()));
 
