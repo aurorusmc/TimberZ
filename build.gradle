@@ -52,15 +52,23 @@ repositories {
         name = "mcmmo-repo"
         url = uri("https://nexus.neetgames.com/repository/maven-public")
     }
+
+    maven {
+        // Apache Releases Repo für log4j-bom
+        url = "https://repository.apache.org/content/repositories/releases/"
+    }
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.5-R0.1-SNAPSHOT")
+    compileOnly ("io.papermc.paper:paper-api:1.21.5-R0.1-SNAPSHOT")
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.13'
     compileOnly 'me.clip:placeholderapi:2.11.6'
     compileOnly 'dev.aurelium:auraskills-api-bukkit:2.2.4'
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
-    compileOnly 'com.gmail.nossr50.mcMMO:mcMMO:2.2.004'
+    compileOnly ('com.gmail.nossr50.mcMMO:mcMMO:2.2.040') {
+        exclude group: "com.google.guava", module: "guava"
+    }
+    compileOnly "com.google.code.gson:gson:2.11.0" // nur zur Kompilierzeit
 }
 
 
