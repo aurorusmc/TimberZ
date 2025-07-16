@@ -1,5 +1,6 @@
 package com.zetaplugins.timberz.service.mcmmo;
 
+import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
 import com.gmail.nossr50.datatypes.player.PlayerProfile;
 import com.gmail.nossr50.datatypes.skills.PrimarySkillType;
@@ -11,19 +12,21 @@ import java.util.Set;
 
 public class McMMoManager {
 
-    private final TimberZ plugin;
-
     public McMMoManager(TimberZ plugin) {
-        this.plugin = plugin;
     }
 
     public void giveMcMMoXP(Player player, Set<Block> blocksBroken) {
-        
-        //noinspection deprecation
-        McMMOPlayer mcMMOPlayer = new McMMOPlayer(player, new PlayerProfile(player.getName(), player.getUniqueId()));
+
+        McMMOPlayer mcMMOPlayer = new McMMOPlayer(player, new PlayerProfile(player.getName(), player.getUniqueId(), 0));
 
             for(Block block : blocksBroken) {
-                mcMMOPlayer.addXp(PrimarySkillType.WOODCUTTING, (float) plugin.getConfig().getDouble("mcMMoXP"));
+                ExperienceAPI.addXpFromBlockBySkill(block.getState(), mcMMOPlayer, PrimarySkillType.WOODCUTTING);
+
+                if(ExperienceAPI.getXpNeededToLevel(ExperienceAPI.getLevel(player, PrimarySkillType.WOODCUTTING) + 1) <= ExperienceAPI.getXP(player, "WOODCUTTING"))
+                    ExperienceAPI.addLevel(player, "WOODCUTTING", 1);
+
             }
+
+
     }
 }
