@@ -72,6 +72,10 @@ messageOnRegionViolation: false
 # Example2: If you set this to 0.5, players will receive half the XP for using TimberZ
 auraSkillsXPMultiplier: 1.0
 
+# If using mcMMo, you can have a custom XP multiplier for the Tree feller skill
+# Example: If you set this to 2.0, players will gain 2 XP for each log chopped with TimberZ
+mcMMoXP: 1.0
+
 
 # === TREE DETECTION ===
 

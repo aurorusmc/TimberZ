@@ -5,6 +5,7 @@ import com.zetaplugins.timberz.dev.DevMode;
 import com.zetaplugins.timberz.service.*;
 import com.zetaplugins.timberz.service.auraskills.AuraSkillsManager;
 import com.zetaplugins.timberz.service.bstats.Metrics;
+import com.zetaplugins.timberz.service.mcmmo.McMMoManager;
 import com.zetaplugins.timberz.service.papi.PapiExpansion;
 import com.zetaplugins.timberz.service.registrars.EventRegistrar;
 import com.zetaplugins.timberz.service.worldguard.WorldGuardManager;
@@ -26,8 +27,10 @@ public final class TimberZ extends JavaPlugin implements Listener {
     private ConfigService configService;
     private WorldGuardManager worldGuardManager;
     private AuraSkillsManager auraSkillsManager;
+    private McMMoManager mcMMoManager;
     private final boolean hasWorldGuard = Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
     private final boolean hasAuraSkills = Bukkit.getPluginManager().getPlugin("AuraSkills") != null;
+    private final boolean hasMcMMo = Bukkit.getPluginManager().getPlugin("mcMMO") != null;
 
     private boolean devMode = false;
 
@@ -88,6 +91,12 @@ public final class TimberZ extends JavaPlugin implements Listener {
             getLogger().info("AuraSkills found! Enabling AuraSkills support...");
             this.auraSkillsManager = new AuraSkillsManager(this);
             getLogger().info("AuraSkills support enabled!");
+        }
+
+        if (hasMcMMo) {
+            getLogger().info("mcMMO found! Enabling mcMMO support...");
+            this.mcMMoManager = new McMMoManager(this);
+            getLogger().info("mcMMO support enabled!");
         }
 
         if (devMode) {
@@ -167,4 +176,8 @@ public final class TimberZ extends JavaPlugin implements Listener {
     public boolean hasAuraSkills() {
         return hasAuraSkills;
     }
+
+    public McMMoManager getMcMMoManager() { return mcMMoManager; }
+
+    public boolean isHasMcMMo() { return hasMcMMo; }
 }

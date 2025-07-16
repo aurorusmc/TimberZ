@@ -48,6 +48,10 @@ repositories {
     maven {
         url = 'https://repo.extendedclip.com/releases/'
     }
+    maven {
+        name = "mcmmo-repo"
+        url = uri("https://nexus.neetgames.com/repository/maven-public")
+    }
 }
 
 dependencies {
@@ -56,7 +60,9 @@ dependencies {
     compileOnly 'me.clip:placeholderapi:2.11.6'
     compileOnly 'dev.aurelium:auraskills-api-bukkit:2.2.4'
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+    compileOnly 'com.gmail.nossr50.mcMMO:mcMMO:2.2.004'
 }
+
 
 tasks.named("runServer") {
     minecraftVersion("1.21.5")

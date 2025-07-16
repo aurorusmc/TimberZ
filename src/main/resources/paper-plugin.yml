@@ -22,6 +22,10 @@ dependencies:
             load: BEFORE
             required: false
             join-classpath: true
+        mcMMO:
+            load: BEFORE
+            required: false
+            join-classpath: true
 
 permissions:
     timberz.admin:

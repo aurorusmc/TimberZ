@@ -52,6 +52,7 @@ public final class TreeBreakListener implements Listener {
                     int logsCount = treeBlocks.size();
                     int durabilityCost = calculateDurabilityCost(logsCount);
                     if (plugin.hasAuraSkills()) plugin.getAuraSkillsManager().giveAuraSkillsXP(player, treeBlocks);
+                    if (plugin.isHasMcMMo()) plugin.getMcMMoManager().giveMcMMoXP(player, treeBlocks);
 
                     // Check if tool has enough durability
                     if (hasEnoughDurability(handItem, durabilityCost)) {
